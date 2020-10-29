@@ -121,31 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &80945739 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9082470208565449561, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1297019457}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &80945741
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80945739}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c10ff05c9d836ff419e0c93b535d1359, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &111226463
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,11 +292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1793727265}
     m_Modifications:
-    - target: {fileID: 9082470208565449565, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,7 +330,7 @@ PrefabInstance:
     - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
         type: 3}
@@ -376,21 +346,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082470209419656212, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 9082470209419656213, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
         type: 3}
@@ -410,6 +365,8 @@ GameObject:
   - component: {fileID: 1662904950}
   - component: {fileID: 1662904949}
   - component: {fileID: 1662904951}
+  - component: {fileID: 1662904953}
+  - component: {fileID: 1662904952}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -460,6 +417,31 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 8171137537627402382, guid: 26f8834ed7bc8b04aa806d4cfbcd9991,
     type: 3}
   m_DetectionMode: -1
+--- !u!114 &1662904952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662904948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1662904953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662904948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bf80f2392139145b55599305309c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1702890096}
 --- !u!1 &1702890096 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9082470209419656213, guid: e5b8881b6f8640c4fbbc4b4464936ee0,
@@ -472,18 +454,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1297019457}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1702890098
-MonoBehaviour:
+--- !u!54 &1702890098
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702890096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f27afd2529b487a488edd4e56f33e6b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1793727260
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +485,7 @@ GameObject:
   - component: {fileID: 1793727262}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

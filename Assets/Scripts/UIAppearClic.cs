@@ -7,12 +7,14 @@ public class UIAppearClic : MonoBehaviour
 {
     [SerializeField] private Image customImage;
 
-   private void Update()
+    void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            customImage.enabled = false;
-        }
+        customImage.enabled = false;
+    }
+
+    void OnMouseDown()
+    {
+        customImage.enabled = true;
     }
 
 }

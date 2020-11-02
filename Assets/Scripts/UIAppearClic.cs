@@ -11,10 +11,15 @@ public class UIAppearClic : MonoBehaviour
     {
         customImage.enabled = false;
     }
-
-    void OnMouseDown()
+    
+    void Update()
     {
-        customImage.enabled = true;
+        if (Input.GetMouseButtonDown(0))
+            customImage.enabled = true;
+
+        if (Input.GetMouseButtonDown(1))
+            customImage.enabled = false;
+
     }
 
 }

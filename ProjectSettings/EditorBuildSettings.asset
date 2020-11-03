@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Sage-GuideScene.unity
     guid: fe025fdabeb41c84cac7cc8d84c2f8ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DialogueScene.unity
     guid: c39dd80233f90a34e8489e829c12095a
   m_configObjects:

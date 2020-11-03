@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Dialogue : MonoBehaviour
+public class DialogueBehavior : MonoBehaviour
 {
     //cached component
     TextMeshProUGUI tmpro;
@@ -12,7 +12,7 @@ public class Dialogue : MonoBehaviour
     InteractionCanvas canvas;
 
     //Dialoguebox fields
-        //holds object that will tell the dialogue what to say
+    //holds object that will tell the dialogue what to say
     [SerializeField] Interactable owner;
     //[SerializeField] string filename = "example1";
     [SerializeField] float txtSpeed = 0.1f;
@@ -33,12 +33,12 @@ public class Dialogue : MonoBehaviour
         //get this object's text mesh pro component
         tmpro = GetComponent<TextMeshProUGUI>();
 
-        //load text file from the resources folder. Has to be from the resources folder
+        //load text file from the resources folder. Has to be from the resources folder.
         txt = Resources.Load("TextFiles/" + owner.GetFileName()) as TextAsset;
 
-        //get all sentences by splitting the text wherever a period is found
-        //this will end up with one empty sentences at the end will have to deal with that
-        sentences = txt.text.Split('\n'); //WE WILL HAVE TO BE CAREFUL WITH ABREVIATIONS OR FIND A WAY TO DEAL WITH THEM
+        //get all sentences by splitting the text wherever a new line space is found
+        //this will end up with one empty sentence at the end will have to deal with that
+        sentences = txt.text.Split('\n');
 
         //start index at second position because we will show the first one on instantiation
         currIndex = 1;
@@ -51,7 +51,7 @@ public class Dialogue : MonoBehaviour
     {
         //first it is empty
         tmpro.text = "";
-        /*
+        /* At the moment we dont need this chunk of code but we will when we decide to incorporate buttons at the end of dialogue
         if(text.Length == 0)
         {
             ShowAnswerOptions();
@@ -77,14 +77,14 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    //method the button will call whenever it is pressed
+    //method the continue button will call whenever it is pressed
     public void showNextSentence()
     {
         StopAllCoroutines();
         int size = sentences.Length;
 
         //Destroy box if the last sentence was shown
-        if (currIndex +1 >= size) //last sentence will be empty which will be where we show the options
+        if (currIndex >= size) //last sentence will be empty which will be where we show the options
         {
             canvas.DestroyBox();
         }
@@ -96,20 +96,22 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    //for the buttons
     public void ShowAnswerOptions()
     {
 
-        foreach(GameObject go in owner.getButtons())
+        foreach (GameObject go in owner.getButtons())
         {
             //instantiates the button and adds it to the arrayList;
-           buttons.Add(Instantiate(go, transform));
+            buttons.Add(Instantiate(go, transform));
         }
     }
 
+    //for the buttons
     public void DestroyAllDialogueButtons()
     {
         //destroy every single dialogue button in the arrayList
-        foreach(GameObject go in buttons)
+        foreach (GameObject go in buttons)
         {
             Destroy(go);
         }

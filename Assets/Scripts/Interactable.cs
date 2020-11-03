@@ -8,9 +8,10 @@ public class Interactable : MonoBehaviour
 
     //radius of the gizmo that will be drawn
     [SerializeField] float radius = 2f;
+    //name of the text file that will be loaded when the object is interacted with. For now it is when it is tapped.
     [SerializeField] string filename = "example1";
 
-    //buttonPrefabs
+    //buttonPrefabs that may be used by the instance
     [SerializeField] GameObject[] buttons;
 
     void Start()
@@ -27,7 +28,11 @@ public class Interactable : MonoBehaviour
 
     }
 
-   //triggers this interactable's interaction
+    //THESE PUBLIC FUNCTIONS ARE MADE PUBLIC BECAUSE OTHER OBJECTS ARE GOING TO CALL THEM
+
+    //triggers this interactable's interaction. I made ShowDialogue seperate in case we want to make this more general
+    //so maybe some interactables will call showDialogue but others will call something else. For now it is still only
+    //calling showDialogue tho.
     public void TriggerInteraction()
     {
         Debug.Log("Interacted");
@@ -38,18 +43,19 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    //getter for the filenName that is associated with instance
+    //getter for the filenName that is associated with the instance
     public string GetFileName()
     {
         return filename;
     }
 
-    //function to show dialogue box
+    //function to show dialogue box, made the parameter intCanvas so it doesnt confuse it with our global variable canvas
     void showDialogue(InteractionCanvas intCanvas)
     {
         intCanvas.ShowBox();
     }
 
+    //For when we have buttons, like for example. A yes or no button to go to the settigns menu
     public GameObject[] getButtons()
     {
         return buttons;

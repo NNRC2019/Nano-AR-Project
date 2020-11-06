@@ -9,9 +9,9 @@ public class Interactable : MonoBehaviour
     //radius of the gizmo that will be drawn
     [SerializeField] float radius = 2f;
     //name of the text file that will be loaded when the object is interacted with. For now it is when it is tapped.
-    [SerializeField] string filename = "example1";
+    [SerializeField] string filename = "ExampleText1";
     //Variable that will store the sentences that will be shown by this object, they must be set in the inspector.
-    [SerializeField] DialogueText text = null;
+    [SerializeField] DialogueText text;
 
     //buttonPrefabs that may be used by the instance
     [SerializeField] GameObject[] buttons;

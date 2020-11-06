@@ -43,11 +43,12 @@ public class DialogueBehavior : MonoBehaviour
         //this will end up with one empty sentence at the end will have to deal with that
         //sentences = owner.getDialogue();//txt.text.Split('\n'); <---Previous way to do it
 
+        DialogueText d = Resources.Load("TextFiles/" + owner.GetFileName()) as DialogueText;
 
         //start index at second position because we will show the first one on instantiation
         currIndex = 1;
         //on creation show first sentence
-        if (dialogueManager != null)  dialogueManager.StartDialogue(owner.getDialogue(), canvas, tmpro, txtSpeed);
+        if (dialogueManager != null)  dialogueManager.StartDialogue(d, canvas, tmpro, txtSpeed);
        // StartCoroutine(ShowText(sentences[0]));
     }
 

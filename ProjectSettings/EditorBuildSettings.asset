@@ -8,15 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Sage-GuideScene.unity
     guid: fe025fdabeb41c84cac7cc8d84c2f8ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DialogueScene.unity
     guid: c39dd80233f90a34e8489e829c12095a
   - enabled: 0
-    path: Assets/Scenes/TestingScene.unity
-    guid: 2d12c33422c4dab45b0b0be38574c1e0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.xr.arcore.PlayerSettings: {fileID: 11400000, guid: e3c1ceef3830bd44caf685c3eacd45eb,
       type: 2}

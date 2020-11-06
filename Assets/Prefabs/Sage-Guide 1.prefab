@@ -176,5 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   radius: 2
-  filename: example1
+  filename: ExampleText1
+  text: {fileID: 0}
   buttons: []

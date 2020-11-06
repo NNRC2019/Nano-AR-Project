@@ -8,15 +8,16 @@ public class DialogueBehavior : MonoBehaviour
     //cached component
     TextMeshProUGUI tmpro;
 
-    //cached object
+    //cached objects
     InteractionCanvas canvas;
+    DialogueText d;
 
     //Dialoguebox fields
-    //holds object that will tell the dialogue what to say
+    //holds prefab of the object that will tell the dialogue what to say
     [SerializeField] Interactable owner;
     //[SerializeField] string filename = "example1";
     [SerializeField] float txtSpeed = 0.1f;
-    TextAsset txt;
+    //TextAsset txt; unsused for now
     //arraylist that holds all dialogue buttons that are active
     ArrayList buttons = new ArrayList();
 
@@ -34,11 +35,13 @@ public class DialogueBehavior : MonoBehaviour
         tmpro = GetComponent<TextMeshProUGUI>();
 
         //load text file from the resources folder. Has to be from the resources folder.
-        txt = Resources.Load("TextFiles/" + owner.GetFileName()) as TextAsset;
+        //txt = Resources.Load("TextFiles/" + owner.GetFileName()) as TextAsset; unsused for now
 
-        //get all sentences by splitting the text wherever a new line space is found
-        //this will end up with one empty sentence at the end will have to deal with that
-        sentences = txt.text.Split('\n');
+        //Loading the dialogue manager associated to our owner. Because we only have a reference to the owner's prefab, it will search for the file with the name that is stated in the prefab, not the instance
+        d = Resources.Load("TextFiles/" + owner.GetFileName()) as DialogueText;
+
+        //get all sentences in our dialogueText object
+        sentences = d.sentences;//txt.text.Split('\n'); <---Previous way to do it
 
         //start index at second position because we will show the first one on instantiation
         currIndex = 1;
@@ -46,12 +49,13 @@ public class DialogueBehavior : MonoBehaviour
         StartCoroutine(ShowText(sentences[0]));
     }
 
+    
     //Coroutine to show next char sequentially
     IEnumerator ShowText(string text)
     {
         //first it is empty
         tmpro.text = "";
-        /* At the moment we dont need this chunk of code but we will when we decide to incorporate buttons at the end of dialogue
+        /*// At the moment we dont need this chunk of code but we will when we decide to incorporate buttons at the end of dialogue
         if(text.Length == 0)
         {
             ShowAnswerOptions();
@@ -68,6 +72,7 @@ public class DialogueBehavior : MonoBehaviour
             }
         }
         */
+        
         foreach (char c in text.ToCharArray())
         {
             //show next char
@@ -76,10 +81,14 @@ public class DialogueBehavior : MonoBehaviour
             yield return new WaitForSeconds(txtSpeed);
         }
     }
+    
 
+    
     //method the continue button will call whenever it is pressed
     public void showNextSentence()
     {
+
+        //stops any coroutines currently occurring to not obstruct the one we will start in our else statement
         StopAllCoroutines();
         int size = sentences.Length;
 
@@ -94,7 +103,9 @@ public class DialogueBehavior : MonoBehaviour
             StartCoroutine(ShowText(sentences[currIndex]));
             currIndex++;
         }
+        
     }
+    
 
     //for the buttons
     public void ShowAnswerOptions()

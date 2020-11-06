@@ -5,10 +5,12 @@ using UnityEngine;
 public class Interizable : MonoBehaviour
 {
     //Shows Dialogue on Unity in Test Button
-    public Dialogue dialogue;
+    [SerializeField] Dialogue dialogue;
 
+    /*
     public void TriggerDialogue ()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
     }
+    */
 }

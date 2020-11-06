@@ -8,11 +8,22 @@ public class Dialogue
 {
 
     //NPC name
-    public string name;
+    //[SerializeField] string name;
 
     //Expands text lines on Unity
     [TextArea(3, 10)]
+    //Sentences to put in the Queue. They must be written in the inspector
+    [SerializeField] string[] sentences;
 
-    //Sentences to put in the Queue
-    public string[] sentences;
+    public string[] getSentences()
+    {
+        return sentences;
+    }
+
+    /*
+    public string getName()
+    {
+        return name;
+    }
+    */
 }

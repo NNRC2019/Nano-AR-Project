@@ -10,6 +10,8 @@ public class Interactable : MonoBehaviour
     [SerializeField] float radius = 2f;
     //name of the text file that will be loaded when the object is interacted with. For now it is when it is tapped.
     [SerializeField] string filename = "example1";
+    //Variable that will store the sentences that will be shown by this object, they must be set in the inspector.
+    [SerializeField] DialogueText text = null;
 
     //buttonPrefabs that may be used by the instance
     [SerializeField] GameObject[] buttons;
@@ -27,6 +29,12 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
 
     }
+
+    void showDialogue(InteractionCanvas intCanvas)
+    {
+        intCanvas.ShowBox();
+    }
+
 
     //THESE PUBLIC FUNCTIONS ARE MADE PUBLIC BECAUSE OTHER OBJECTS ARE GOING TO CALL THEM
 
@@ -49,10 +57,10 @@ public class Interactable : MonoBehaviour
         return filename;
     }
 
-    //function to show dialogue box, made the parameter intCanvas so it doesnt confuse it with our global variable canvas
-    void showDialogue(InteractionCanvas intCanvas)
+    //getter for the dialogueTexts
+    public DialogueText getDialogue()
     {
-        intCanvas.ShowBox();
+        return text;
     }
 
     //For when we have buttons, like for example. A yes or no button to go to the settigns menu

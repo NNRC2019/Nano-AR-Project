@@ -30,19 +30,39 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //This block allows us to use click controls if we are running the app in the unity editor
+        #if !UNITY_EDITOR
+        TouchUpdate();
+        #else
+        ClickUpdate();
+        #endif
+        
 
+    }
+
+    //temporary coroutine to resize hit object in order to signify that it has been interacted with, we should remove it when we dont need it anymore
+    IEnumerator ScaleMe(Transform objTr)
+    {
+        objTr.localScale *= 1.2f;
+        yield return new WaitForSeconds(0.5f);
+        objTr.localScale /= 1.2f;
+    }
+
+
+    private void TouchUpdate()
+    {
         //checks if there has been atleast 1 touch
-        if (Input.touchCount > 0) //if (Input.GetMouseButtonDown(0))  I leave this here so we can quickly switch to clicking for tests
+        if (Input.touchCount > 0)
         {
-           //stores the first touch
+            //stores the first touch
             Touch touch = Input.GetTouch(0);
 
-           
+
             //variable that will store the object hit by the raycast
             RaycastHit hit;
 
             //ray that will be shot out
-            Ray ray = Camera.main.ScreenPointToRay(touch.position); //Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
             //if the ray hit an object Interact
             if (Physics.Raycast(ray, out hit))
@@ -65,11 +85,37 @@ public class Player : MonoBehaviour
         }
     }
 
-    //temporary coroutine to resize hit object in order to signify that it has been interacted with, we should remove it when we dont need it anymore
-    IEnumerator ScaleMe(Transform objTr)
+
+    private void ClickUpdate()
     {
-        objTr.localScale *= 1.2f;
-        yield return new WaitForSeconds(0.5f);
-        objTr.localScale /= 1.2f;
+        //checks if there has been atleast 1 touch
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            //variable that will store the object hit by the raycast
+            RaycastHit hit;
+
+            //ray that will be shot out
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //if the ray hit an object Interact
+            if (Physics.Raycast(ray, out hit))
+            {
+                //Check if the object that was clicked/tapped on is interactable by putting it in a variable and see if its null
+                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (interactable != null)
+                {
+                    //We set the interactable to be our current target
+                    currentTarget = interactable;
+                    //We start the temp coroutine that temporarily increases target size
+                    StartCoroutine(ScaleMe(hit.transform));
+                    // Message to show which object was clicked on
+                    Debug.Log("You selected the " + hit.transform.name);
+
+                    //if there is a canvas on screen show the dialogue box
+                    interactable.TriggerInteraction();
+                }
+            }
+        }
     }
 }

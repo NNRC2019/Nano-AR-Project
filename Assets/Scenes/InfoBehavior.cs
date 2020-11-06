@@ -12,10 +12,14 @@ public class InfoBehavior : MonoBehaviour
 
     Vector3 desiredScale = Vector3.zero;
 
-
+    void OnAwake()
+    {
+        SectionInfo = transform.GetChild(0).gameObject.transform;
+    }
     //Description vector switches between normal and desginated scales.
     void Update()
     {
+        
         SectionInfo.localScale = Vector3.Lerp(SectionInfo.localScale, desiredScale, Time.deltaTime * SPEED);
     }
 

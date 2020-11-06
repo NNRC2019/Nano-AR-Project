@@ -19,11 +19,13 @@ public class Gaze : MonoBehaviour
      */
     void Update()
     {
+        
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit))
         {
             GameObject target = hit.collider.gameObject;
             if (target.CompareTag("hasDescription"))
             {
+                infos = FindObjectsOfType<InfoBehavior>().ToList();
                 OpenMenu(target.GetComponent<InfoBehavior>());
             }
             else

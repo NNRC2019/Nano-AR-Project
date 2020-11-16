@@ -4,24 +4,45 @@ using UnityEngine;
 
 public class MusicPlayerScript : MonoBehaviour
 {
-    public AudioSource AudioSource;
+    // Reference to Audio Source component
+    private AudioSource audioSrc;
+    private bool toggle = true;
 
-    public float musicVolume = 1f;
+    // Music volume variable that will be modified
+    // by dragging slider knob
+    private float musicVolume = 1f;
 
-    // Start is called before the first frame update
+    // Use this for initialization
     void Start()
     {
-        AudioSource.Play();
+
+        // Assign Audio Source component to control it
+        audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        AudioSource.volume = musicVolume;
+
+        if (toggle)
+            audioSrc.volume = musicVolume;
+
+        else
+            audioSrc.volume = 0f;
     }
 
-    public void updateVolume(float volume)
+    // Method that is called by slider game object
+    // This method takes vol value passed by slider
+    // and sets it as musicValue
+    public void SetVolume(float vol)
     {
-        musicVolume = volume;
+        musicVolume = vol;
     }
+
+    public void ToggleSound()
+    {
+        toggle = !toggle;
+
+    }
+
 }

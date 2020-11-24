@@ -3,30 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Class that designates the behavior of the Dialogue. It shows the text associated to its owner interactable
+/// </summary>
 public class DialogueBehavior : MonoBehaviour
 {
-    //cached component
+    /// <summary>
+    /// Cached instance of the text mesh pro component in this object.
+    /// </summary>
     TextMeshProUGUI tmpro;
 
-    //cached objects
+    /// <summary>
+    /// Cached instance of the interaction canvas in the scene.
+    /// </summary>
     InteractionCanvas canvas;
+    /// <summary>
+    /// Cached DialogueText object associated to the owner interactable.
+    /// </summary>
     DialogueText d;
 
     //Dialoguebox fields
-    //holds prefab of the object that will tell the dialogue what to say
+    /// <summary>
+    /// Holds prefab of the object that will tell the dialogue what to say.
+    /// </summary>
     [SerializeField] Interactable owner;
     //[SerializeField] string filename = "example1";
+    /// <summary>
+    /// Speed at which the chars of the sentences should be displayed.
+    /// </summary>
     [SerializeField] float txtSpeed = 0.1f;
     //TextAsset txt; unsused for now
-    //arraylist that holds all dialogue buttons that are active
+    /// <summary>
+    /// ArrayLst that holds all dialogue buttons that are active.
+    /// </summary>
     ArrayList buttons = new ArrayList();
 
-    //array to store sentences
+    /// <summary>
+    /// array to store sentences from the DIalogueText object.
+    /// </summary>
     [SerializeField] string[] sentences;
+    /// <summary>
+    /// Variable that keeps track of the currentindex of the sentence that is being displayed.
+    /// </summary>
     private int currIndex;
 
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// In the start method we fetch our cached instances from the scene.
+    /// We initialize our sentences array and we display the first sentence in the dialogue.
+    /// </summary>
     void Start()
     {
         //get canvas with the script interactionCanvas
@@ -49,8 +74,12 @@ public class DialogueBehavior : MonoBehaviour
         StartCoroutine(ShowText(sentences[0]));
     }
 
-    
-    //Coroutine to show next char sequentially
+
+    /// <summary>
+    /// Coroutine to show next char sequentially with a time interval.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     IEnumerator ShowText(string text)
     {
         //first it is empty
@@ -81,10 +110,12 @@ public class DialogueBehavior : MonoBehaviour
             yield return new WaitForSeconds(txtSpeed);
         }
     }
-    
 
-    
-    //method the continue button will call whenever it is pressed
+
+
+    /// <summary>
+    /// Method the continue button will call whenever it is pressed in order to show the next sentence in the array.
+    /// </summary>
     public void showNextSentence()
     {
 
@@ -105,9 +136,11 @@ public class DialogueBehavior : MonoBehaviour
         }
         
     }
-    
 
-    //for the buttons
+
+    /// <summary>
+    /// When buttons are involved, displays the buttons.
+    /// </summary>
     public void ShowAnswerOptions()
     {
 
@@ -118,7 +151,9 @@ public class DialogueBehavior : MonoBehaviour
         }
     }
 
-    //for the buttons
+    /// <summary>
+    /// When buttons are involved, destroys the buttons.
+    /// </summary>
     public void DestroyAllDialogueButtons()
     {
         //destroy every single dialogue button in the arrayList

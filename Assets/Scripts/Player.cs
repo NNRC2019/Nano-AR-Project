@@ -3,34 +3,48 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-//The player script for now is attached to the AR Session Origin as it is from where the player will see the scene
+/// <summary>
+/// The player script for now is attached to the AR Session Origin as it is from where the player will see the scene.
+/// This script will shoot raycasts from the position where the user tapped the screen.
+/// </summary>
 public class Player : MonoBehaviour
 {
-    //The current target will be the object that was tapped that is not part of the UI
-    [SerializeField] Object currentTarget;
+    /// <summary>
+    /// The current target will be the object that was tapped that is not part of the UI.
+    /// </summary>
+    [SerializeField] private Object currentTarget;
 
-    //variable to hold the position on the screen where the tap occured
-    private Vector2 touchPosition;
-    //variable that is true if a tap on the screen is being held continuously
-    //private bool onTouchHold = false; //unused for now
-
-    //cached instance of our arCamera in the scene
+    /// <summary>
+    /// Cached instance of our arCamera in the scene.
+    /// </summary>
     private Camera arCamera;
 
+
+    /***UNUSED FIELDS***/
+    // Variable to hold the position on the screen where the tap occured.
+    //private Vector2 touchPosition;
+    //variable that is true if a tap on the screen is being held continuously
+    //private bool onTouchHold = false; //unused for now
     //cached instance of the ARRaycast manager attached to this object
     //private ARRaycastManager arRaycastManger; //unused for now, it is necessary for detecting touches on AR planes!
     //list that will store the AR planes touched by the raycast
     //private static List<ARRaycastHit> hits = new List<ARRaycastHit>(); //unused for now, also necessary for detecting touches in AR planes
 
+    /// <summary>
+    /// In the start method we fetch our cached instances from the scene.
+    /// </summary>
     void Start()
     {
         //arRaycastManger = GetComponent<ARRaycastManager>();
         arCamera = Camera.main;
     }
 
+    /// <summary>
+    /// We run the game with click controls if we are in the Unity editor for testing purposes. Otherwise, we run it with
+    /// touch controls.
+    /// </summary>
     void Update()
     {
-        //This block allows us to use click controls if we are running the app in the unity editor
         #if !UNITY_EDITOR
         TouchUpdate();
         #else
@@ -40,15 +54,23 @@ public class Player : MonoBehaviour
 
     }
 
-    //temporary coroutine to resize hit object in order to signify that it has been interacted with, we should remove it when we dont need it anymore
-    IEnumerator ScaleMe(Transform objTr)
+    /// <summary>
+    /// Temporary coroutine to resize hit object for half a second in order to signify that it has been interacted with.
+    /// We should remove it when we dont need it anymore.
+    /// </summary>
+    /// <param name="objectTr">The transform component of the target object.</param>
+    /// <returns></returns>
+    IEnumerator ScaleMe(Transform objectTr)
     {
-        objTr.localScale *= 1.2f;
+        objectTr.localScale *= 1.2f;
         yield return new WaitForSeconds(0.5f);
-        objTr.localScale /= 1.2f;
+        objectTr.localScale /= 1.2f;
     }
 
-
+    /// <summary>
+    /// Gets the position where user touched the screen and raycasts from this position.
+    /// If an interactable object was hit, then its interaction is triggered.
+    /// </summary>
     private void TouchUpdate()
     {
         //checks if there has been atleast 1 touch
@@ -85,7 +107,10 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Gets the position where user clicked the screen and raycasts from this position.
+    /// If an interactable object was hit, then its interaction is triggered.
+    /// </summary>
     private void ClickUpdate()
     {
         //checks if there has been atleast 1 touch

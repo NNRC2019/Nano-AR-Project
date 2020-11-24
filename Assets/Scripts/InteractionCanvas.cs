@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Canvas that shows the dialogue box for an interactable
+/// </summary>
 public class InteractionCanvas : MonoBehaviour
 {
 
-    //element that it will instantiate
+    /// <summary>
+    /// TextBox that it will instantiate
+    /// </summary>
     [SerializeField] Object uiElemPrefab;
 
-    //x and y position where we want the instantiated element to appear
+    /// <summary>
+    /// x position where we want the instantiated element to appear.
+    /// </summary>
     [SerializeField] float elemXPos = 15.4f;
+    /// <summary>
+    /// y position where we want the instantiated element to appear.
+    /// </summary>
     [SerializeField] float elemtYpos = 78.2f;
 
-    //holds the current instance of the dialogue box
+    /// <summary>
+    /// Holds the current instance of the dialogue box
+    /// </summary>
     private Object currentDialogueBox;
 
-    //Function that will show the dialogue box when called
+    /// <summary>
+    /// Function to instantiate the dialogue box if one is not already created.
+    /// </summary>
     public void ShowBox()
     {
         //We store the instantiated object in a global variable for accesibility
@@ -27,7 +41,9 @@ public class InteractionCanvas : MonoBehaviour
         
     }
 
-    //Function that will destroy the dialogue box when called
+    /// <summary>
+    /// Function to destroy the dialogue box.
+    /// </summary>
     public void DestroyBox()
     {
         Destroy(currentDialogueBox);

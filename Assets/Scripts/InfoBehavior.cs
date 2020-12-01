@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Script by Geidel X. Solivan on Nov 2020
+ */  
 public class InfoBehavior : MonoBehaviour
 {
 
@@ -30,6 +33,11 @@ public class InfoBehavior : MonoBehaviour
         OnClickAction();
     }
 
+    /*
+     * When function is called, creates a ray where the person touches the screen. 
+     * This ray is then sent foward if there is any description object visible. If ray
+     * collides with anything, it checks to see if collided object has a description.
+     */
     public void OnClickAction()
     {
         RaycastHit hit;
@@ -38,7 +46,7 @@ public class InfoBehavior : MonoBehaviour
             GameObject target = hit.collider.gameObject;
             if (target.Equals(SectionInfo.parent.gameObject))
             {
-                if (target.name.Equals("Exit")) { Application.Quit(); }
+                if (target.name.Equals("Exit")) { Application.Quit(); } //If object is the exit cube, quit application
                 //Other scene transition code can go here
             }
         }

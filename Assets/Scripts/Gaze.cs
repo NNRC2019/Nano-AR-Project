@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/*
+ * Script by Geidel X. Solivan on Nov 2020
+ */
 public class Gaze : MonoBehaviour
 {
     List<InfoBehavior> infos = new List<InfoBehavior>(); //List to keep track of all objects with description

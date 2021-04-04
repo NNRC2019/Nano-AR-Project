@@ -6,6 +6,9 @@ using UnityEngine.Experimental.XR;
 using System;
 using UnityEngine.XR.ARSubsystems;
 
+/*
+ * Script by Geidel X. Solivan on Nov 2020
+ */
 public class TapToPlace : MonoBehaviour
 {
     

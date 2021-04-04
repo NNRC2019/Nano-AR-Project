@@ -1,7 +1,9 @@
 ﻿
 using UnityEngine;
 
-
+/*
+ * Script by Geidel X. Solivan on Nov 2020
+ */
 public class FaceCamera : MonoBehaviour
 {
     Transform cam; //Variable to track camera

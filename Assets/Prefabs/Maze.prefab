@@ -54,6 +54,6 @@ MonoBehaviour:
   OneWallCellPrefab: {fileID: 3449473873480350165, guid: 97ea7abe79241014bb9137cb50866498,
     type: 3}
   size: 6
-  separationSpace: 4
+  separationSpace: 8
   instantiationRotation: 0
   generationStepDelay: 0.5

@@ -5,92 +5,114 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     
-    GameObject targetToMove;
+    GameObject target;
     [SerializeField] float moveSpeed = 1f;
 
 
     void SetTarget()
     {
-        targetToMove = FindObjectOfType<Maze>().gameObject; //For now we are targeting the Maze object when it gets instantiated
+        target = FindObjectOfType<Maze>().gameObject; //For now we are targeting the Maze object when it gets instantiated
     }
  
 
     public void MoveUp()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(0, moveSpeed, 0);
+            target.transform.position += new Vector3(0, moveSpeed, 0);
         }
        
     }
 
     public void MoveDown()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(0, -moveSpeed, 0);
+            target.transform.position += new Vector3(0, -moveSpeed, 0);
         }
         
     }
 
     public void MoveLeft()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(-moveSpeed, 0, 0);
+            target.transform.position += new Vector3(-moveSpeed, 0, 0);
         }
         
     }
 
     public void MoveRight()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(moveSpeed, 0, 0);
+            target.transform.position += new Vector3(moveSpeed, 0, 0);
         }
         
     }
 
     public void MoveForward()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(0, 0, moveSpeed);
+            target.transform.position += new Vector3(0, 0, moveSpeed);
         }
     }
 
 
     public void MoveBack()
     {
-        if (targetToMove == null)
+        if (target == null)
         {
             SetTarget();
         }
         else
         {
-            targetToMove.transform.position += new Vector3(0, 0, -moveSpeed);
+            target.transform.position += new Vector3(0, 0, -moveSpeed);
         }
     }
 
+    public void Shrink()
+    {
+        if (target == null)
+        {
+            SetTarget();
+        }
+        else
+        {
+            target.transform.localScale /= 2;
+        }
+    }
 
+    public void Expand()
+    {
+        if (target == null)
+        {
+            SetTarget();
+        }
+        else
+        {
+            target.transform.localScale *= 2;
+        }
+    }
 }

@@ -5,18 +5,18 @@ using UnityEngine;
 public class Maze : MonoBehaviour
 {
 
-
+    [Header("Cell Prefabs")]
     [SerializeField] MazeCell cellPrefab;
     [SerializeField] MazeCell ThreeWallCellPrefab;
     [SerializeField] MazeCell TwoWallCellPrefab;
     [SerializeField] MazeCell cornerTwoWallCellPrefab;
     [SerializeField] MazeCell OneWallCellPrefab;
 
-
-    public int size;
-    public float separationSpace = 2f;
-    public float instantiationRotation = 0;
-    public float generationStepDelay = 0.5f;
+    [Header("Class Properties")]
+    [SerializeField] int size;
+    [SerializeField] float separationSpace = 2f;
+    [SerializeField] float instantiationRotation = 0;
+    [SerializeField] float generationStepDelay = 0f;
 
 
     private MazeCell[,] cells;
@@ -56,7 +56,6 @@ public class Maze : MonoBehaviour
                     yield return delay;
                     CreateCell(z,x);
                 }
-                //else yield return 0;
             }
         }
     }

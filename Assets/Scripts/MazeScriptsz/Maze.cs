@@ -12,12 +12,33 @@ public class Maze : MonoBehaviour
     [SerializeField] MazeCell cornerTwoWallCellPrefab;
     [SerializeField] MazeCell OneWallCellPrefab;
 
+    [SerializeField] GameObject BeadPlaceHolderPrefab;
+    [SerializeField] int beadAmount;
 
     public int size;
     public float separationSpace = 2f;
     public float instantiationRotation = 0;
     public float generationStepDelay = 0.5f;
 
+    private int beadsPerArea;
+
+    private int beadsForArea0;
+    private int cellCounteroftheArea0;
+
+    private int beadsForArea1;
+    private int cellCounteroftheArea1;
+
+    private int beadsForArea2;
+    private int cellCounteroftheArea2;
+    
+    private int beadsForArea3;
+    private int cellCounteroftheArea3;
+    
+    private int beadsForArea4;
+    private int cellCounteroftheArea4;
+    
+    private int beadsForArea5;
+    private int cellCounteroftheArea5;
 
     private MazeCell[,] cells;
 
@@ -61,6 +82,30 @@ public class Maze : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        beadsPerArea = Mathf.FloorToInt(Mathf.Floor(beadAmount / 6));
+        int leftoverBeads = beadAmount % 6;
+
+        beadsForArea0 = beadsPerArea;
+        cellCounteroftheArea0 = 1;
+
+        beadsForArea1 = beadsPerArea + (leftoverBeads > 0 ? 1 : 0);
+        cellCounteroftheArea1 = 1;
+
+        beadsForArea2 = beadsPerArea + (leftoverBeads > 1 ? 1 : 0);
+        cellCounteroftheArea2 = 1;
+
+        beadsForArea3 = beadsPerArea + (leftoverBeads > 2 ? 1 : 0);
+        cellCounteroftheArea3 = 1;
+
+        beadsForArea4 = beadsPerArea + (leftoverBeads > 3 ? 1 : 0);
+        cellCounteroftheArea4 = 1;
+
+        beadsForArea5 = beadsPerArea + (leftoverBeads > 4 ? 1 : 0);
+        cellCounteroftheArea5 = 1;
+    }
+
     private void CreateCell(int z, int x)
     {
 
@@ -71,8 +116,95 @@ public class Maze : MonoBehaviour
         //newCell.transform.localPosition = new Vector3(x - sizeX * separationSpace + separationSpace, 0f, z - sizeZ * separationSpace + separationSpace);
         newCell.transform.localPosition = new Vector3((z-size) *separationSpace, 0f, (size-x) *separationSpace); //I would like it if it appeared in the middle but It seems to work for now
         newCell.transform.rotation = Quaternion.Euler(0, instantiationRotation, 0); //does this work this way?
+ 
+        switch (z)
+        {
+            case 5:
+                int beadsToInstantiateForArea5 = Random.Range(0, beadsForArea5 + 1);
+                beadsToInstantiateForArea5 = cellCounteroftheArea5 == 3 ? beadsForArea5 : beadsToInstantiateForArea5;
+                beadsToInstantiateForArea5 = beadsToInstantiateForArea5 > beadsForArea5
+                                                ? beadsToInstantiateForArea5 - beadsForArea5 : beadsToInstantiateForArea5;
+                for (int count = 0; count < beadsToInstantiateForArea5; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea5++;
+                beadsForArea5 -= beadsToInstantiateForArea5;
+                break;
+            case 4:
+                int beadsToInstantiateForArea4 = Random.Range(0, beadsForArea4 + 1);
+                beadsToInstantiateForArea4 = cellCounteroftheArea4 == 5 ? beadsForArea4 : beadsToInstantiateForArea4;
+                beadsToInstantiateForArea4 = beadsToInstantiateForArea4 > beadsForArea4
+                                                ? beadsToInstantiateForArea4 - beadsForArea4 : beadsToInstantiateForArea4;
+                for (int count = 0; count < beadsToInstantiateForArea4; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea4++;
+                beadsForArea4 -= beadsToInstantiateForArea4;
+                break;
+            case 3:
+                int beadsToInstantiateForArea3 = Random.Range(0, beadsForArea3 + 1);
+                beadsToInstantiateForArea3 = cellCounteroftheArea3 == 3 ? beadsForArea3 : beadsToInstantiateForArea3;
+                beadsToInstantiateForArea3 = beadsToInstantiateForArea3 > beadsForArea3
+                                                ? beadsToInstantiateForArea3 - beadsForArea3 : beadsToInstantiateForArea3;
+                for (int count = 0; count < beadsToInstantiateForArea3; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea3++;
+                beadsForArea3 -= beadsToInstantiateForArea3;
+                break;
+            case 2:
+                int beadsToInstantiateForArea2 = Random.Range(0, beadsForArea2 + 1);
+                beadsToInstantiateForArea2 = cellCounteroftheArea2 == 4 ? beadsForArea2 : beadsToInstantiateForArea2;
+                beadsToInstantiateForArea2 = beadsToInstantiateForArea2 > beadsForArea2
+                                                ? beadsToInstantiateForArea2 - beadsForArea2 : beadsToInstantiateForArea2;
+                for (int count = 0; count < beadsToInstantiateForArea2; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea2++;
+                beadsForArea2 -= beadsToInstantiateForArea2;
+                break;
+            case 1:
+                int beadsToInstantiateForArea1 = Random.Range(0, beadsForArea1 + 1);
+                beadsToInstantiateForArea1 = cellCounteroftheArea1 == 4 ? beadsForArea1 : beadsToInstantiateForArea1;
+                beadsToInstantiateForArea1 = beadsToInstantiateForArea1 > beadsForArea1
+                                                ? beadsToInstantiateForArea1 - beadsForArea1 : beadsToInstantiateForArea1;
+                for (int count = 0; count < beadsToInstantiateForArea1; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea1++;
+                beadsForArea1 -= beadsToInstantiateForArea1;
+                break;
+            case 0:
+                int beadsToInstantiateForArea0 = Random.Range(0, beadsForArea0 + 1);
+                beadsToInstantiateForArea0 = cellCounteroftheArea0 == 2 ? beadsForArea0 : beadsToInstantiateForArea0;
+                beadsToInstantiateForArea0 = beadsToInstantiateForArea0 > beadsForArea0
+                                                ? beadsToInstantiateForArea0 - beadsForArea0 : beadsToInstantiateForArea0;
+                for (int count = 0; count < beadsToInstantiateForArea0; count++)
+                {
+                    BeadInstantiation(z, x, newCell, count + 1);
+                }
+                cellCounteroftheArea0++;
+                beadsForArea0 -= beadsToInstantiateForArea0;
+                break;
+            default:
+                print("Incorrect z value.");
+                break;
+        }
     }
 
+    private void BeadInstantiation(int z, int x, MazeCell newCell, int count)
+    {
+        GameObject newBead = Instantiate(BeadPlaceHolderPrefab, newCell.transform.localPosition, transform.rotation);
+        newBead.name = "Bead " + z + ", " + x + ", " + count;
+        newBead.transform.localPosition = new Vector3(newBead.transform.localPosition.x - Random.Range(-1.9f, 1.9f), //Select only the extremes (Random.Range(-1.9f, 1.9f) < 0 ? -1.9f : 1.9f),
+                                                      newBead.transform.localPosition.y + Random.Range(0.16f, 1.84f),
+                                                      newBead.transform.localPosition.z + Random.Range(-1.9f, 1.9f)); //Select only the extremes (Random.Range(-1.9f, 1.9f) < 0 ? -1.9f : 1.9f));
+    }
 
     private MazeCell CellChoice(int[,] grid, int z, int x)
     {

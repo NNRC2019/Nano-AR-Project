@@ -41,8 +41,6 @@ public class Maze : MonoBehaviour
         {0,0,1,0,1,1}
     };
 
-
-
     public IEnumerator Generate()
     {
         WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
@@ -68,8 +66,8 @@ public class Maze : MonoBehaviour
         newCell.name = "Maze Cell " + z + ", " + x;
         newCell.transform.parent = transform;
         //newCell.transform.localPosition = new Vector3(x - sizeX * separationSpace + separationSpace, 0f, z - sizeZ * separationSpace + separationSpace);
-        newCell.transform.localPosition = new Vector3((z-size) *separationSpace, 0f, (size-x) *separationSpace); //I would like it if it appeared in the middle but It seems to work for now
-        newCell.transform.rotation = Quaternion.Euler(0, instantiationRotation, 0); //does this work this way?
+        newCell.transform.localPosition = new Vector3((z-size) *separationSpace, 0f, (size-x) *separationSpace);
+        newCell.transform.rotation = Quaternion.Euler(0, instantiationRotation, 0);
     }
 
 

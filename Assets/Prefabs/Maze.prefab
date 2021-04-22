@@ -55,7 +55,7 @@ MonoBehaviour:
     type: 3}
   BeadPlaceHolderPrefab: {fileID: 4157938624307435111, guid: b7e0b130f54e791459d11d608343414f,
     type: 3}
-  beadAmount: 10
+  beadAmount: 60
   size: 6
   separationSpace: 4
   instantiationRotation: 0

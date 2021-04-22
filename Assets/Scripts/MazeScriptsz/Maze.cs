@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The Maze class is in charge of deining and creating the maze with cells based on a matrix and beads randomized all over it. 
+/// </summary>
 public class Maze : MonoBehaviour
 {
 
@@ -63,7 +66,10 @@ public class Maze : MonoBehaviour
     };
 
 
-
+    /// <summary>
+    /// The Generate method takes the values from the matrix to create the maze cell by cell calling the CreateCell method.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Generate()
     {
         WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
@@ -82,10 +88,13 @@ public class Maze : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The Start method defines the amount of beads to instantiate per area and stores them in variables along with a counter for each of them.
+    /// </summary>
     private void Start()
     {
-        beadsPerArea = Mathf.FloorToInt(Mathf.Floor(beadAmount / 6));
-        int leftoverBeads = beadAmount % 6;
+        beadsPerArea = Mathf.FloorToInt(Mathf.Floor(beadAmount / size));
+        int leftoverBeads = beadAmount % size;
 
         beadsForArea0 = beadsPerArea;
         cellCounteroftheArea0 = 1;
@@ -106,6 +115,13 @@ public class Maze : MonoBehaviour
         cellCounteroftheArea5 = 1;
     }
 
+    /// <summary>
+    /// The CreateCell method instantiate each new cell to be added by calling the CellChoice method and positions it correctly. 
+    /// This method also use the z value to divide the maze in areas according to the size variable and switch between areas to
+    /// randomize the amount of beads to instantiate per area and add them to the scene inside the maze by calling the BeadInstantion method. 
+    /// </summary>
+    /// <param name="z"></param>
+    /// <param name="x"></param>
     private void CreateCell(int z, int x)
     {
 
@@ -197,15 +213,40 @@ public class Maze : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The BeadInstantiation method uses the z and x parameters to name each bead object similarly to the cell they correspond to and
+    /// the count to give a unique name to each one of them. The newCell parameter is used to locate the bead once instantiated near it
+    /// in a random position inside the cell.
+    /// </summary>
+    /// <param name="z"></param>
+    /// <param name="x"></param>
+    /// <param name="newCell"></param>
+    /// <param name="count"></param>
     private void BeadInstantiation(int z, int x, MazeCell newCell, int count)
     {
-        GameObject newBead = Instantiate(BeadPlaceHolderPrefab, newCell.transform.localPosition, transform.rotation);
+        GameObject newBead = Instantiate(BeadPlaceHolderPrefab);
         newBead.name = "Bead " + z + ", " + x + ", " + count;
-        newBead.transform.localPosition = new Vector3(newBead.transform.localPosition.x - Random.Range(-1.9f, 1.9f), //Select only the extremes (Random.Range(-1.9f, 1.9f) < 0 ? -1.9f : 1.9f),
-                                                      newBead.transform.localPosition.y + Random.Range(0.16f, 1.84f),
-                                                      newBead.transform.localPosition.z + Random.Range(-1.9f, 1.9f)); //Select only the extremes (Random.Range(-1.9f, 1.9f) < 0 ? -1.9f : 1.9f));
+        newBead.transform.parent = newCell.transform;
+        /*
+         * The random range is derived from the position relative to the cell as a parent of the bead
+         * If the bead does not have a parent, the random ranges should be the following
+         * newBead.transform.localPosition = new Vector3(newCell.transform.localPosition.x + Random.Range(-1.9f, 1.90f),
+         *                                               newCell.transform.localPosition.y + Random.Range(0.16f, 1.84f),
+         *                                               newCell.transform.localPosition.z + Random.Range(-1.9f, 1.9f));
+         * */
+        newBead.transform.localPosition = new Vector3(Random.Range(-0.48f, 0.48f),
+                                                      Random.Range(0.15f, 1.95f),
+                                                      Random.Range(0.48f, -0.48f));
     }
 
+    /// <summary>
+    /// The CellChoice method uses its parameters to select which kind of cell prefab should be instantiated in accordance with the
+    /// matrix grid values and the cells near it to create a cohesive maze with a unique path.
+    /// </summary>
+    /// <param name="grid"></param>
+    /// <param name="z"></param>
+    /// <param name="x"></param>
+    /// <returns></returns>
     private MazeCell CellChoice(int[,] grid, int z, int x)
     {
         bool left = false;

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class dictates the behavior of the maze object. It Generates the maze beased on a selected layout by choosing the appropriate piece in each position.
+/// </summary>
 public class Maze : MonoBehaviour
 {
 
@@ -41,6 +44,10 @@ public class Maze : MonoBehaviour
         {0,0,1,0,1,1}
     };
 
+    /// <summary>
+    /// Coroutine that generates the maze by going through every index of the specified grid layout.
+    /// </summary>
+    /// <returns> the time delay for which to wait before generating the next tile</returns>
     public IEnumerator Generate()
     {
         WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
@@ -58,6 +65,12 @@ public class Maze : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that instantiates a Maze cell, its name, parent transform, position relative to the parent transform, and rotation 
+    /// based on the position in the specified grid. Also adds the newly instantiated cell the Maze 2D array.
+    /// </summary>
+    /// <param name="z">Specifies which column in the test grid that this cell is located in.</param>
+    /// <param name="x">Specifies which row in the test grid that this cell is located in.</param>
     private void CreateCell(int z, int x)
     {
 
@@ -70,7 +83,14 @@ public class Maze : MonoBehaviour
         newCell.transform.rotation = Quaternion.Euler(0, instantiationRotation, 0);
     }
 
-
+    /// <summary>
+    /// Function that chooses which type of prefab current cell is, and which rotation it should have based on the surrounding 
+    /// cells of the given position in the grid array.
+    /// </summary>
+    /// <param name="grid">The test grid that the maze is using to generate its cells.</param>
+    /// <param name="z">The column in the test grid that this cell is located in </param>
+    /// <param name="x">The row in the test grid that this cell is located in</param>
+    /// <returns>The chosen prefab to instantiate</returns>
     private MazeCell CellChoice(int[,] grid, int z, int x)
     {
         bool left = false;

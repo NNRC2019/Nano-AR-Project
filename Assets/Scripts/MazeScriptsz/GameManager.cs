@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	{
 		mazeInstance = Instantiate(mazePrefab) as Maze;
 		//mazeInstance.transform.localPosition = new Vector3(11, -3, -5);
-		mazeInstance.transform.position = FindObjectOfType<ARCameraManager>().transform.localPosition;
+		//mazeInstance.transform.position = FindObjectOfType<ARCameraManager>().transform.localPosition;
 		StartCoroutine(mazeInstance.Generate());
 		
 	}

@@ -24,25 +24,108 @@ public class Maze : MonoBehaviour
 
     private MazeCell[,] cells;
 
-    private int[,] testGrid1 =
-    {
-        {1,1,1,0,0,0},
-        {0,0,1,0,0,0},
-        {0,1,1,1,1,1},
-        {1,0,1,0,0,0},
-        {1,1,1,1,0,0},
-        {0,0,1,0,0,0}
+    List<int[,]> array = new List<int[,]>()
+    { new int[,]
+  {
+    { 1, 1, 1, 0, 0, 0 },
+    { 0, 0, 1, 0, 0, 0 },
+    { 0, 1, 1, 1, 1, 1 },
+    { 1, 0, 1, 0, 0, 0 },
+    { 1, 1, 1, 1, 0, 0 },
+    { 0, 0, 1, 0, 0, 0 }
 
-    };
-    private int[,] testGrid2 =
+            },
+    new int[,]
+  {
+    { 1, 1, 1, 1, 1, 0 },
+    { 0, 0, 0, 0, 1, 0 },
+    { 1, 1, 1, 1, 1, 1 },
+    { 0, 1, 0, 0, 0, 1 },
+    { 0, 1, 1, 1, 1, 0 },
+    { 0, 0, 1, 0, 1, 1 }
+            },
+    new int[,]
+  {
+    { 1, 0, 1, 1, 1, 1 },
+    { 1, 0, 1, 1, 0, 1 },
+    { 1, 1, 1, 0, 0, 0 },
+    { 0, 1, 1, 1, 1, 1 },
+    { 0, 1, 0, 1, 0, 0 },
+    { 1, 1, 0, 1, 1, 1 }
+            },
+    new int[,]
+  {
+    { 0, 1, 1, 1, 1, 1 },
+    { 0, 0, 1, 0, 1, 0 },
+    { 0, 1, 1, 1, 0, 0 },
+    { 0, 0, 0, 1, 1, 1 },
+    { 0, 0, 0, 1, 0, 1 },
+    { 0, 1, 1, 1, 0, 1 }
+            },
+    new int[,]
+  {
+    { 0, 1, 1, 0, 1, 0 },
+    { 1, 0, 1, 0, 1, 1 },
+    { 1, 1, 1, 0, 0, 1 },
+    { 0, 1, 1, 1, 0, 1 },
+    { 1, 1, 0, 1, 1, 1 },
+    { 0, 1, 1, 0, 0, 1 }
+            },
+    new int[,]
+  {
+    { 0, 1, 0, 0, 1, 1 },
+    { 0, 1, 0, 0, 0, 1 },
+    { 1, 1, 1, 0, 1, 1 },
+    { 0, 0, 1, 1, 1, 0 },
+    { 0, 1, 1, 0, 1, 1 },
+    { 1, 1, 0, 0, 0, 1 }
+            },
+    new int[,]
+  {
+    { 1, 1, 1, 0, 1, 1 },
+    { 0, 0, 1, 0, 1, 0 },
+    { 0, 1, 1, 0, 1, 1 },
+    { 1, 1, 0, 0, 0, 1 },
+    { 0, 1, 1, 1, 1, 1 },
+    { 0, 0, 0, 0, 1, 0 }
+            },
+    new int[,]
+  {
+    { 1, 1, 0, 0, 1, 1 },
+    { 1, 0, 0, 0, 0, 1 },
+    { 1, 0, 1, 0, 0, 1 },
+    { 1, 1, 1, 1, 1, 1 },
+    { 0, 1, 0, 1, 0, 0 },
+    { 1, 1, 0, 1, 1, 1 }
+            },
+    new int[,]
+  {
+    { 0, 0, 1, 1, 1, 0 },
+    { 0, 0, 1, 0, 0, 1 },
+    { 1, 0, 1, 1, 1, 1 },
+    { 1, 1, 0, 0, 1, 0 },
+    { 0, 1, 1, 1, 1, 0 },
+    { 0, 1, 0, 1, 0, 0 }
+            },
+    new int[,]
+  {
+    { 1, 0, 1, 0, 1, 1 },
+    { 1, 1, 1, 1, 1, 0 },
+    { 0, 1, 0, 1, 0, 0 },
+    { 0, 1, 1, 1, 0, 0 },
+    { 1, 1, 0, 1, 1, 1 },
+    { 1, 0, 1, 1, 0, 1 }
+            }
+        }
+;
+
+public int[,] TestGrid()
     {
-        {1,1,1,1,1,0},
-        {0,0,0,0,1,0},
-        {1,1,1,1,1,1},
-        {0,1,0,0,0,1},
-        {0,1,1,1,1,0},
-        {0,0,1,0,1,1}
-    };
+        var a = Random.Range(0, 10);
+        
+        return array[a];
+    }
+
 
     /// <summary>
     /// Coroutine that generates the maze by going through every index of the specified grid layout.
@@ -50,16 +133,17 @@ public class Maze : MonoBehaviour
     /// <returns> the time delay for which to wait before generating the next tile</returns>
     public IEnumerator Generate()
     {
+        int[,] selectedGrid = TestGrid();
         WaitForSeconds delay = new WaitForSeconds(generationStepDelay);
         cells = new MazeCell[size, size];
         for (int z = 0; z < size; z++)
         {
             for (int x = 0; x < size; x++)
             {
-                if(testGrid2[x,z] == 1)
+                if(selectedGrid[x,z] == 1)
                 {
                     yield return delay;
-                    CreateCell(z,x);
+                    CreateCell(z,x,selectedGrid);
                 }
             }
         }
@@ -71,10 +155,11 @@ public class Maze : MonoBehaviour
     /// </summary>
     /// <param name="z">Specifies which column in the test grid that this cell is located in.</param>
     /// <param name="x">Specifies which row in the test grid that this cell is located in.</param>
-    private void CreateCell(int z, int x)
+    /// <param name="selectedGrid">Specifies the layout grid that was chosen to generate the maze</param>
+    private void CreateCell(int z, int x, int[,]selectedGrid)
     {
 
-        MazeCell newCell = Instantiate(CellChoice(testGrid2, z, x)) as MazeCell;
+        MazeCell newCell = Instantiate(CellChoice(selectedGrid, z, x)) as MazeCell;
         cells[z, x] = newCell;
         newCell.name = "Maze Cell " + z + ", " + x;
         newCell.transform.parent = transform;

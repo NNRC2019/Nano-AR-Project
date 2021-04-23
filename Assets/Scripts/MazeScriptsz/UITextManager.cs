@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class manages the UI labels that give the player information on the target position and scale properties
+/// </summary>
 public class UITextManager : MonoBehaviour
 {
     [SerializeField] Text xText;
@@ -24,12 +27,17 @@ public class UITextManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds the object of the specified type to be found in the scene
+    /// </summary>
     void SetTarget()
     {
         target = FindObjectOfType<Maze>().gameObject; //For now we are targeting the Maze object when it gets instantiated
     }
 
-
+    /// <summary>
+    /// Sets the text for the label depending on whethers its position text or scale text.
+    /// </summary>
     void setText()
     {
         if (posText)

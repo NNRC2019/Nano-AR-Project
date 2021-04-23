@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+/// <summary>
+/// This class handles the instantiation of the Maze object
+/// </summary>
 public class GameManager : MonoBehaviour
 {
 	[SerializeField] Maze mazePrefab;
@@ -21,6 +24,9 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// This function instantiatiates the Maze object and calls its coroutine to generate the layout
+	/// </summary>
 	private void BeginGame()
 	{
 		mazeInstance = Instantiate(mazePrefab) as Maze;
@@ -30,6 +36,9 @@ public class GameManager : MonoBehaviour
 		
 	}
 
+	/// <summary>
+	/// Currently Unused. This function triggers a restart of mazeinstantiation and generation
+	/// </summary>
 	private void RestartGame()
 	{
 		StopAllCoroutines();

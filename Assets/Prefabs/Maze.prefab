@@ -53,6 +53,9 @@ MonoBehaviour:
     type: 3}
   OneWallCellPrefab: {fileID: 3449473873480350165, guid: 97ea7abe79241014bb9137cb50866498,
     type: 3}
+  BeadPlaceHolderPrefab: {fileID: 4157938624307435111, guid: b7e0b130f54e791459d11d608343414f,
+    type: 3}
+  beadAmount: 60
   size: 6
   separationSpace: 8
   instantiationRotation: 0

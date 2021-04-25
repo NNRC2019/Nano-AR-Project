@@ -212,7 +212,7 @@ public int[,] TestGrid()
         newCell.name = "Maze Cell " + z + ", " + x;
         newCell.transform.parent = transform;
         //newCell.transform.localPosition = new Vector3(x - sizeX * separationSpace + separationSpace, 0f, z - sizeZ * separationSpace + separationSpace);
-        newCell.transform.localPosition = new Vector3((z) *separationSpace, 0f, (x) *separationSpace);
+        newCell.transform.localPosition = new Vector3((z) *separationSpace, 0f, (-x) *separationSpace);
         newCell.transform.rotation = Quaternion.Euler(0, instantiationRotation, 0);
  
         switch (z)
